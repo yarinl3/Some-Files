@@ -1,5 +1,4 @@
 import webbrowser
-from bs4 import BeautifulSoup
 import requests
 import hashlib
 import json
@@ -32,9 +31,7 @@ def main():
                    "TE": "trailers"}
         result = requests.get(f'https://www.virustotal.com/ui/files/{hash256}', headers=headers)
         content = result.content
-        with open('C:/Users/Yarin/Desktop/1.json', 'w') as fd:
-            fd.write(str(content))
-        site_json = json.loads(BeautifulSoup(content, 'html.parser').text)
+        site_json = json.loads(content)
         if 'error' in site_json:
             listb.config(font=("Courier", 12))
             listb.config(text=f"{site_json['error']['message']})")
